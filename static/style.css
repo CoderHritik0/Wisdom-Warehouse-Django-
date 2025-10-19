@@ -1,0 +1,171 @@
+:root {
+  --bs-primary: #4f46e5;
+  --bs-primary-rgb: 79, 70, 229;
+  --bs-primary-subtle: #eef2ff;
+}
+
+body {
+  background: linear-gradient(to bottom, #f5f7ff, #ffffff);
+  color: #333;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  color: black;
+}
+
+.btn-primary {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background-color: #4338ca;
+}
+
+.btn-outline-primary {
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-color: var(--bs-primary);
+  --bs-btn-hover-bg: var(--bs-primary);
+  --bs-btn-hover-border-color: var(--bs-primary);
+  --bs-btn-hover-color: #ffffff;
+  border-radius: 12px;
+  padding: 10px 24px;
+  font-weight: 500;
+}
+
+.hero {
+  padding: 6rem 0;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #111827;
+}
+
+.hero span {
+  color: #4f46e5;
+}
+
+.hero p {
+  color: #6b7280;
+  font-size: 1.1rem;
+}
+
+.feature-card {
+  background-color: #f9f9ff;
+  border-radius: 20px;
+  padding: 40px 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌈 Different icon colors */
+.icon-blue {
+  color: #3b82f6;
+  background-color: rgb(59, 130, 246, 0.3);
+}
+
+.icon-purple {
+  color: #ae80fc;
+  background-color: rgb(174, 128, 252, 0.3);
+}
+
+.icon-green {
+  color: #8ad9cf;
+  background-color: rgb(138, 217, 207, 0.3);
+}
+
+/* Optional subtle hover effect on icons */
+.icon-wrapper:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+footer {
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+  padding: 20px;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* Custom color classes for feature sections */
+.bg-purple-subtle {
+  background-color: #e0c8fb;
+}
+
+.text-purple-emphasis {
+  color: #7c3aed;
+}
+
+.badge.bg-purple-subtle {
+  background-color: #ede9fe !important;
+  color: #7c3aed !important;
+}
+
+.bg-teal-subtle {
+  background-color: #aadcd0;
+}
+
+.text-teal-emphasis {
+  color: #0d9488;
+}
+
+.badge.bg-teal-subtle {
+  background-color: #ccfbf1 !important;
+  color: #0d9488 !important;
+}
+
+.bg-rose-subtle {
+  background-color: #fcd3d6;
+}
+
+.text-rose-emphasis {
+  color: #e11d48;
+}
+
+.badge.bg-rose-subtle {
+  background-color: #ffe4e6 !important;
+  color: #e11d48 !important;
+}
+
+/* form css */
+.form-floating > .form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+.form-check-input:checked {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.link-primary {
+  color: var(--bs-primary);
+}
+
+.link-primary:hover,
+.link-primary:focus {
+  color: #4338ca;
+}
