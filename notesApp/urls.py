@@ -25,5 +25,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('features/', views.features, name='features'),
     path('userauth/', include('userauth.urls')),
-    # path('notes/', include('notes.urls')),
+    path('notes/', include('notes.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

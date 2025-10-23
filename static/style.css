@@ -169,3 +169,25 @@ footer {
 .link-primary:focus {
   color: #4338ca;
 }
+
+.masonry {
+  column-count: 3; /* Adjust number of columns */
+  column-gap: 1rem;
+}
+.masonry .card {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.card-img {
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.required-field::after {
+  content: " *";
+  color: red;
+}
+.note-creation-form {
+  background-color: #fff;
+}

@@ -1,0 +1,42 @@
+{% extends "login_layout.html" %}
+{% load static %}
+{% block title %}
+    New Note
+{% endblock %}
+
+{% block content %}
+<div class="container pt-5">
+  <div class="note-creation-form mx-auto mb-5 p-4 border rounded shadow-sm" style="max-width: 600px;">
+    <h2 class="mb-4">Create a New Note</h2>
+    <form method="post" class="row" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3 col-sm-12">
+        <label for="noteTitle" class="form-label">Title</label>
+        <input type="text" class="form-control" id="noteTitle" name="title" placeholder="Enter note title">
+      </div>
+      <div class="mb-3 col-sm-12">
+        <label for="noteContent" class="form-label required-field">Content</label>
+        <textarea class="form-control" id="noteContent" name="content" rows="6" placeholder="Write your note here..." required></textarea>
+      </div>
+      <div class="mb-3 col-sm-12">
+        <label for="noteImages" class="form-label">Upload Images <span class="text-muted">(Multiple Images can be selected)</span></label>
+        <input type="file" class="form-control" id="noteImages" name="images" multiple>
+      </div>
+      <div class="mb-3 col-sm-6">
+        <label for="noteColor" class="form-label">Pick a Color</label>
+        <input type="color" class="form-control" id="noteColor" name="color" value="#ffffff">
+      </div>
+      <div class="mb-3 col-sm-6">
+        <label for="noteTag" class="form-label">Enter Tag</label>
+        <input type="text" class="form-control" id="noteTag" name="tag" placeholder="Enter note tag">
+      </div>
+      <div class="mb-3 col-sm-4">
+        <input type="checkbox" class="form-check-input" id="noteHidden" name="hidden">
+        <label for="noteHidden" class="form-label mx-2">Hide</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Create Note</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% block footer %}{% endblock %}

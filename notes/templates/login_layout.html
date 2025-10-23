@@ -1,0 +1,67 @@
+{% extends "layout.html" %} 
+
+{% load static %} 
+
+{% block navbar %}
+<!-- Header/Navigation -->
+<header class="bg-white shadow-sm sticky-top z-3">
+  <nav class="container navbar navbar-expand-md py-2">
+    {% if request.path == '/notes/create/' %}
+    <a href="{% url 'index' %}" class="btn btn-outline-secondary rounded-pill px-4 me-3 fw-semibold d-flex align-items-center gap-2">
+            <i class="bi bi-arrow-left"></i></a>
+    <a class="navbar-brand fs-4 fw-bold text-dark" href="{% url 'index' %}">Notes App</a>
+    <div class="collapse navbar-collapse" id="main-nav">
+      <div class="ms-auto d-flex align-items-center gap-2">
+        {% else %}
+        <a class="navbar-brand fs-4 fw-bold text-dark" href="{% url 'index' %}">Notes App</a>
+    <div class="collapse navbar-collapse" id="main-nav">
+      <div class="ms-auto d-flex align-items-center gap-2">
+          <!-- New Note Button -->
+          <a
+            href="{% url 'create_note' %}"
+            id="newNoteBtn"
+            class="btn btn-primary rounded-pill px-4 fw-semibold d-flex align-items-center gap-2"
+          >
+            <i class="bi bi-plus-lg"></i> New Note
+          </a>
+        {% endif %}
+        {% comment %} <a
+          href="{% url 'create_note' %}"
+          id="newNoteBtn"
+          class="btn btn-primary rounded-pill px-4 fw-semibold d-flex align-items-center gap-2"
+        >
+          <i class="bi bi-plus-lg"></i> New Note
+        </a> {% endcomment %}
+        <div class="dropdown">
+          <a
+            href="#"
+            class="nav-link"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://placehold.co/40x40/E0E7FF/4F46E5?text=H"
+              class="rounded-circle"
+              alt="User Avatar"
+            />
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li>
+              <a class="dropdown-item" href="#" id="viewHiddenBtn"
+                >View Hidden Notes</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="login.html">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+{% endblock %} 
+
+{% block content %}{% endblock %}
+
+{% comment %} {% block footer %}{% endblock %} {% endcomment %}

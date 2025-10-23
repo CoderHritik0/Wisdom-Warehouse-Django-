@@ -1,0 +1,8 @@
+{% extends "login_layout.html" %} {% load static %} {% block content %}
+<div class="container py-5">
+  <div class="masonry">
+    {% include "notes/note_list.html" %}
+  </div>
+</div>
+
+{% endblock %} {% block footer %}{% endblock %}
