@@ -46,11 +46,11 @@ def create_note(request):
 #         form = NoteForm(instance=note_instance)
 #     return render(request, 'notes/create_note.html', {'note_form': form, 'image_form': NoteImageForm(), 'note': note_instance})
 
-# def delete_note(request, note_id):
-#     note_instance = get_object_or_404(note, pk=note_id, user=request.user)
-#     note_instance.is_deleted = True
-#     note_instance.save()
-#     return redirect('note_list')
+def delete_note(request, note_id):
+    note_instance = get_object_or_404(note, pk=note_id, user=request.user)
+    note_instance.is_deleted = True
+    note_instance.save()
+    return redirect('index')
 
 # def note_detail(request, note_id):
 #     note_instance = get_object_or_404(note, pk=note_id)
