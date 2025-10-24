@@ -7,6 +7,16 @@ from django.shortcuts import get_object_or_404, redirect
 def index(request):
     notes = note.objects.all().filter(is_deleted=False).order_by('-updated_at')
     note_images = note_image.objects.all()
+    for n in notes:
+        FIXED_WIDTH = 403
+        heights = []
+        for img in note_images.filter(note=n):
+            if img.image and img.image.width and img.image.height:
+                scaled_height = (img.image.height / img.image.width) * FIXED_WIDTH
+                heights.append(scaled_height)
+
+        n.max_height = max(heights, default=0)
+
     return render(request, 'notes/index.html', {'notes': notes})
 
 # def note_list(request):

@@ -16,8 +16,9 @@
     {% if note.note_image_set.all %}
       <div
         id="carouselNote{{ note.note_id }}"
-        class="carousel slide"
+        class="carousel slide d-flex align-items-center"
         data-bs-ride="carousel"
+        style="height: {{ note.max_height }}px;"
       >
         <div class="carousel-inner">
           {% for img in note.note_image_set.all %}
