@@ -1,6 +1,9 @@
 {% extends "layout.html" %} 
+
 {% load static %}
-{% block title %}Home | Notes App{% endblock %} 
+
+{% block title %}Home | Wisdom Warehouse{% endblock %} 
+
 {% block content %}
 <section
   class="hero container text-center text-md-start d-flex align-items-center justify-content-between flex-column flex-md-row"
@@ -17,14 +20,14 @@
     <img
       src="{% static 'home_bg.png' %}"
       class="img-fluid rounded-4 shadow"
-      alt="Notes App Screenshot"
+      alt="Wisdom Warehouse Screenshot"
     />
   </div>
 </section>
 
 <!-- Features Section -->
 <section id="features" class="container text-center py-5">
-  <h2 class="fw-bold mb-5">Why Notes App?</h2>
+  <h2 class="fw-bold mb-5">Why Wisdom Warehouse?</h2>
   <div class="row g-4">
     <!-- Feature 1 -->
     <div class="col-md-4">
@@ -63,4 +66,5 @@
   </div>
 </section>
 {% endblock %}
+
 {% block footer %}{% endblock %}

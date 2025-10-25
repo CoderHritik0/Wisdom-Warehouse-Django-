@@ -184,19 +184,21 @@ footer {
   border-radius: 0.5rem;
 }
 
-.carousel-item img {
+/* .carousel-item img {
   width: 100%;
   height: auto;
   object-fit: contain;
 }
+
 .carousel-inner {
   height: auto !important;
-}
+} */
 
 .required-field::after {
   content: " *";
   color: red;
 }
+
 .note-creation-form {
   background-color: #fff;
 }

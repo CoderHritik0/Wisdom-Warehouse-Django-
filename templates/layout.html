@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %} Notes App {% endblock %}</title>
+    <title>{% block title %} Wisdom Warehouse {% endblock %}</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -21,38 +21,50 @@
   </head>
   <body>
     <!-- Header/Navigation -->
-     {% block navbar %}
-    <nav class="navbar navbar-expand-lg py-3">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="/">Notes App</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navmenu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navmenu">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active {% block features %}text-secondary{% endblock %}" href="/features">Features</a>
-            </li>
-            {% comment %}
-            <li class="nav-item">
-              <a class="nav-link text-secondary" href="#pricing">Pricing</a>
-            </li>
-            {% endcomment %}
-            <li class="nav-item">
-              <a class="nav-link active {% block login %}text-secondary{% endblock %}" href="/userauth/login/">Login</a>
-            </li>
-          </ul>
-          <a href="/userauth/signup/" class="btn btn-{% block signup-btn %}{% endblock %}primary ms-lg-3 px-4">Get Started</a>
+    {% block navbar %}
+      <nav class="navbar navbar-expand-lg py-3">
+        <div class="container">
+          <a class="navbar-brand fw-bold" href="/">Wisdom Warehouse</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navmenu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link active {% block features %}text-secondary{% endblock %}"
+                  href="/features"
+                  >Features</a
+                >
+              </li>
+              {% comment %}
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#pricing">Pricing</a>
+              </li>
+              {% endcomment %}
+              <li class="nav-item">
+                <a
+                  class="nav-link active {% block login %}text-secondary{% endblock %}"
+                  href="/userauth/login/"
+                  >Login</a
+                >
+              </li>
+            </ul>
+            <a
+              href="/userauth/signup/"
+              class="btn btn-{% block signup-btn %}{% endblock %}primary ms-lg-3 px-4"
+              >Get Started</a
+            >
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
     {% endblock %}
-
+    
     {% block content %}{% endblock %}
 
     <!-- Footer -->
@@ -62,9 +74,13 @@
         <script>
           document.write(new Date().getFullYear());
         </script>
-        Notes App. All rights reserved.
+        Wisdom Warehouse. All rights reserved.
       </p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

@@ -1,51 +1,77 @@
 {% extends "login_layout.html" %}
+
 {% load static %}
-{% block title %}New Note{% endblock %}
+
+{% block title %}{% if note.note_id %}Edit Note{% else %}Create a New Note{% endif %}{% endblock %}
 
 {% block content %}
-<div class="container pt-5">
-  <div class="note-creation-form mx-auto mb-5 p-4 border rounded shadow-sm" style="max-width: 600px;">
-    <h2 class="mb-4">Create a New Note</h2>
+  <div class="container pt-5">
+    <div class="note-creation-form mx-auto mb-5 p-4 border rounded shadow-sm">
+      <h2 class="mb-4">
+        {% if note.note_id %}Edit Note{% else %}Create a New Note{% endif %}
+      </h2>
 
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form.non_field_errors }}
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ form.non_field_errors }}
 
-      <div class="mb-3">
-        {{ form.title.label_tag }}
-        {{ form.title }}
-        {{ form.title.errors }}
-      </div>
-
-      <div class="mb-3">
-        {{ form.description.label_tag }}
-        {{ form.description }}
-        {{ form.description.errors }}
-      </div>
-
-      <div class="mb-3">
-        <label for="id_images" class="form-label">Upload Images</label>
-        {{ image_form.images }}
-      </div>
-
-      <div class="row">
-        <div class="col-sm-6 mb-3">
-          {{ form.color.label_tag }}
-          {{ form.color }}
+        <div class="mb-3">
+          {{ form.title.label_tag }} {{ form.title }} {{ form.title.errors }}
         </div>
-        <div class="col-sm-6 mb-3">
-          {{ form.tag.label_tag }}
-          {{ form.tag }}
+
+        <div class="mb-3">
+          {{ form.description.label_tag }} {{ form.description }} {{ form.description.errors }}
         </div>
-      </div>
 
-      <div class="mb-3">
-        {{ form.is_hidden }}
-        {{ form.is_hidden.label_tag }}
-      </div>
+        <div class="mb-3">
+          <label for="id_images" class="form-label">Upload Images</label>
+          {{ image_form.images }}
+        </div>
 
-      <button type="submit" class="btn btn-primary">Create Note</button>
-    </form>
+        <div class="row">
+          <div class="col-sm-6 mb-3">
+            {{ form.color.label_tag }} {{ form.color }}
+          </div>
+          <div class="col-sm-6 mb-3">{{ form.tag.label_tag }} {{ form.tag }}</div>
+        </div>
+
+        <div class="mb-3">
+          {{ form.is_hidden }} {{ form.is_hidden.label_tag }}
+        </div>
+        {% if note and note.note_image_set.all %}
+          <div class="mb-3" id="existing-images-section">
+            <label class="form-label">Existing Images</label>
+            <div class="d-flex flex-wrap gap-2">
+              {% for img in note.note_image_set.all %}
+                <div class="position-relative" style="width: 100px; height: 100px">
+                  <img
+                    src="{{ img.image.url }}"
+                    alt="Note image"
+                    class="img-thumbnail"
+                    style="width: 100%; height: 100%; object-fit: cover"
+                  />
+                  <!-- Trash icon button -->
+                  <button
+                    class="btn btn-sm btn-danger delete-image-btn m-1 position-absolute top-0 end-0"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteModal"
+                    data-type="image"
+                    data-image-id="{{ img.image_id }}"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="submit" class="btn btn-primary">
+            {% if note %}Update Note{% else %}Create Note{% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 {% endblock %}
