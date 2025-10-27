@@ -42,21 +42,16 @@
                   >Features</a
                 >
               </li>
-              {% comment %}
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="#pricing">Pricing</a>
-              </li>
-              {% endcomment %}
               <li class="nav-item">
                 <a
                   class="nav-link active {% block login %}text-secondary{% endblock %}"
-                  href="/userauth/login/"
+                  href="/notes/login/"
                   >Login</a
                 >
               </li>
             </ul>
             <a
-              href="/userauth/signup/"
+              href="/notes/signup/"
               class="btn btn-{% block signup-btn %}{% endblock %}primary ms-lg-3 px-4"
               >Get Started</a
             >
@@ -69,7 +64,13 @@
 
     <!-- Footer -->
     <footer class="{% block footer %}{% endblock %}">
-      <p>© <script>document.write(new Date().getFullYear());</script> Wisdom Warehouse. All rights reserved.</p>
+      <p>
+        ©
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+        Wisdom Warehouse. All rights reserved.
+      </p>
     </footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

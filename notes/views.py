@@ -1,13 +1,17 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from .models import note, note_image
-from .forms import NoteForm, NoteImageForm
+from .forms import NoteForm, NoteImageForm, UserRegistrationForm, AuthenticationForm
 from django.shortcuts import get_object_or_404, redirect
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate, logout
 
 # Create your views here.
+@login_required
 def index(request):
-    notes = note.objects.all().filter(is_deleted=False).order_by('-updated_at')
+    notes = note.objects.all().filter(
+        user=request.user,is_deleted=False).order_by('-updated_at')
     note_images = note_image.objects.all()
     for n in notes:
         FIXED_WIDTH = 403
@@ -40,6 +44,7 @@ def index(request):
     return render(request, 'notes/index.html', {'notes': notes})
 
 @require_POST
+@login_required
 def delete_note_image(request, image_id):
     if request.method == 'POST':
         try:
@@ -50,10 +55,7 @@ def delete_note_image(request, image_id):
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
     return JsonResponse({'success': False, 'error': 'Invalid request'}, status=400)
 
-# def note_list(request):
-#     notes = note.objects.all().filter(is_deleted=False).order_by('-updated_at')
-#     return render(request, 'notes/note_list.html')
-
+@login_required
 def create_or_edit_note(request, note_id=None):
     # If note_id exists → edit, else create new
     note_instance = get_object_or_404(note, pk=note_id, user=request.user) if note_id else None
@@ -85,13 +87,46 @@ def create_or_edit_note(request, note_id=None):
     })
 
 
+@login_required
 def delete_note(request, note_id):
     note_instance = get_object_or_404(note, pk=note_id, user=request.user)
     note_instance.is_deleted = True
     note_instance.save()
     return redirect('index')
 
-# def note_detail(request, note_id):
-#     note_instance = get_object_or_404(note, pk=note_id)
-#     images = note_image.objects.filter(note=note_instance)
-#     return render(request, 'notes/note_detail.html', {'note': note_instance, 'images': images})
+
+def signup(request):
+    # print("signup view")
+    if request.method == "POST":
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password1'])
+            user.save()
+            login(request, user)
+            return redirect('index')  # Redirect to index or login page after successful signup
+        else:
+            print(form.errors)
+    else:
+        form = UserRegistrationForm()
+    return render(request, "registration/signup.html", {"form": form})
+
+def login_view(request):
+    if request.method == "POST":
+        print("custom login view")
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')  # or your notes list page
+    else:
+        form = AuthenticationForm()
+
+    return render(request, "registration/login.html", {"form": form})
+
+def logout_view(request):
+    logout(request)
+    return render(request, 'website/index.html')

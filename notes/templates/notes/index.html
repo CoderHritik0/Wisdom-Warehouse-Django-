@@ -6,8 +6,12 @@
 
 {% block content %}
   <div class="container py-5">
-    <div class="masonry">{% include "notes/note_list.html" %}</div>
+    {% if notes %}
+      <div class="masonry">{% include "notes/note_list.html" %}</div>
+    {% else %}
+      <div class="text-center text-muted py-4">No notes yet.</div>
+    {% endif %}
   </div>
 {% endblock %}
 
-{% block footer %}{% endblock %}
+{% block footer %} {% if notes %} {# normal footer #} {% else %}fixed-bottom{% endif %} {% endblock %}

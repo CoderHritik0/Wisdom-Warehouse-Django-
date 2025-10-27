@@ -1,70 +1,70 @@
-{% extends "layout.html" %} 
+{% extends "layout.html" %}
 
 {% load static %}
 
-{% block title %}Home | Wisdom Warehouse{% endblock %} 
+{% block title %}Home | Wisdom Warehouse{% endblock %}
 
 {% block content %}
-<section
-  class="hero container text-center text-md-start d-flex align-items-center justify-content-between flex-column flex-md-row"
->
-  <div class="col-md-6">
-    <h1>Organize Your Ideas <span>Beautifully</span></h1>
-    <p class="my-4">
-      Note app helps you capture, organize, and sync your notes across all
-      devices.
-    </p>
-    <a href="/userauth/signup/" class="btn btn-primary me-3">Get Started</a>
-  </div>
-  <div class="col-md-5 mt-5 mt-md-0 text-center">
-    <img
-      src="{% static 'home_bg.png' %}"
-      class="img-fluid rounded-4 shadow"
-      alt="Wisdom Warehouse Screenshot"
-    />
-  </div>
-</section>
+  <section
+    class="hero container text-center text-md-start d-flex align-items-center justify-content-between flex-column flex-md-row"
+  >
+    <div class="col-md-6">
+      <h1>Organize Your Ideas <span>Beautifully</span></h1>
+      <p class="my-4">
+        Note app helps you capture, organize, and sync your notes across all
+        devices.
+      </p>
+      <a href="/notes/signup/" class="btn btn-primary me-3">Get Started</a>
+    </div>
+    <div class="col-md-5 mt-5 mt-md-0 text-center">
+      <img
+        src="{% static 'home_bg.png' %}"
+        class="img-fluid rounded-4 shadow"
+        alt="Wisdom Warehouse Screenshot"
+      />
+    </div>
+  </section>
 
 <!-- Features Section -->
-<section id="features" class="container text-center py-5">
-  <h2 class="fw-bold mb-5">Why Wisdom Warehouse?</h2>
-  <div class="row g-4">
-    <!-- Feature 1 -->
-    <div class="col-md-4">
-      <div class="feature-card h-100">
-        <div class="icon-wrapper icon-blue mb-3">
-          <i class="bi bi-cloud-arrow-up-fill fs-1"></i>
+  <section id="features" class="container text-center py-5">
+    <h2 class="fw-bold mb-5">Why Wisdom Warehouse?</h2>
+    <div class="row g-4">
+      <!-- Feature 1 -->
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="icon-wrapper icon-blue mb-3">
+            <i class="bi bi-cloud-arrow-up-fill fs-1"></i>
+          </div>
+          <h5 class="fw-semibold mb-2 text-secondary">Cloud Sync</h5>
+          <p class="text-secondary">Access your notes anywhere, anytime.</p>
         </div>
-        <h5 class="fw-semibold mb-2 text-secondary">Cloud Sync</h5>
-        <p class="text-secondary">Access your notes anywhere, anytime.</p>
       </div>
-    </div>
 
-    <!-- Feature 2 -->
-    <div class="col-md-4">
-      <div class="feature-card h-100">
-        <div class="icon-wrapper icon-purple mb-3">
-          <i class="bi bi-tags-fill fs-1"></i>
+      <!-- Feature 2 -->
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="icon-wrapper icon-purple mb-3">
+            <i class="bi bi-tags-fill fs-1"></i>
+          </div>
+          <h5 class="fw-semibold mb-2 text-secondary">Smart Tags</h5>
+          <p class="text-secondary">Organize effortlessly with AI tagging.</p>
         </div>
-        <h5 class="fw-semibold mb-2 text-secondary">Smart Tags</h5>
-        <p class="text-secondary">Organize effortlessly with AI tagging.</p>
       </div>
-    </div>
 
-    <!-- Feature 3 -->
-    <div class="col-md-4">
-      <div class="feature-card h-100">
-        <div class="icon-wrapper icon-green mb-3">
-          <i class="bi bi-pencil-square fs-1"></i>
+      <!-- Feature 3 -->
+      <div class="col-md-4">
+        <div class="feature-card h-100">
+          <div class="icon-wrapper icon-green mb-3">
+            <i class="bi bi-pencil-square fs-1"></i>
+          </div>
+          <h5 class="fw-semibold mb-2 text-secondary">Beautiful Editor</h5>
+          <p class="text-secondary">
+            Focus on writing with a distraction-free design.
+          </p>
         </div>
-        <h5 class="fw-semibold mb-2 text-secondary">Beautiful Editor</h5>
-        <p class="text-secondary">
-          Focus on writing with a distraction-free design.
-        </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endblock %}
 
 {% block footer %}{% endblock %}

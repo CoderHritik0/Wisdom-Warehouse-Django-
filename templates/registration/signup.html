@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+
+{% load static %}
+
+{% block title %}Sign Up | NotesApp{% endblock %}
+
+{% block signup %}{% endblock %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row g-0 align-items-center justify-content-center">
+      <!-- Form Column -->
+      <div
+        class="col-lg-5 col-md-8 col-12 d-flex align-items-center justify-content-center py-5"
+      >
+        <div class="w-100" style="max-width: 450px">
+          <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body p-4 p-sm-5">
+              <h1 class="h3 fw-bold text-center mb-2">Create an Account</h1>
+              <p class="text-secondary text-center mb-4">
+                Start organizing your ideas beautifully.
+              </p>
+
+              <form method="post" novalidate>
+                {% csrf_token %}
+
+                <!-- Show non-field errors -->
+                {% if form.non_field_errors %}
+                  <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                {% endif %}
+
+                <!-- Username -->
+                <div class="form-floating mb-3">
+                  {{ form.username }}
+                  <label for="{{ form.username.id_for_label }}">Username</label>
+                    {% if form.username.errors %}
+                      <div class="text-danger small">
+                        {{ form.username.errors|striptags }}
+                      </div>
+                    {% endif %}
+                </div>
+
+                <!-- Email -->
+                <div class="form-floating mb-3">
+                  {{ form.email }}
+                  <label for="{{ form.email.id_for_label }}">Email address</label>
+                    {% if form.email.errors %}
+                      <div class="text-danger small">
+                        {{ form.email.errors|striptags }}
+                      </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password1 -->
+                <div class="form-floating mb-3">
+                  {{ form.password1 }}
+                  <label for="{{ form.password1.id_for_label }}">Password</label>
+                    {% if form.password1.errors %}
+                      <div class="text-danger small">
+                        {{ form.password1.errors|striptags }}
+                      </div>
+                    {% endif %}
+                </div>
+
+                <!-- Password2 -->
+                <div class="form-floating mb-4">
+                  {{ form.password2 }}
+                  <label for="{{ form.password2.id_for_label }}"
+                    >Confirm Password</label
+                  >
+                    {% if form.password2.errors %}
+                      <div class="text-danger small">
+                        {{ form.password2.errors|striptags }}
+                      </div>
+                    {% endif %}
+                </div>
+
+                <!-- Terms -->
+                <div class="form-check mb-4">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="terms"
+                    required
+                  />
+                  <label class="form-check-label" for="terms">
+                    I agree to the
+                    <a href="#" class="text-decoration-none link-primary"
+                      >Terms of Service</a
+                    >
+                  </label>
+                </div>
+
+                <div class="d-grid">
+                  <button
+                    class="btn btn-primary btn-lg rounded-pill fw-semibold"
+                    type="submit"
+                  >
+                    Create Account
+                  </button>
+                </div>
+
+                <p class="text-center text-secondary mt-4 mb-0">
+                  Already have an account?
+                  <a
+                    href="/notes/login/"
+                    class="text-decoration-none link-primary fw-semibold"
+                    >Login</a
+                  >
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Column -->
+      <div class="col-lg-7 d-none d-lg-block">
+        <div
+          class="bg-primary-subtle h-100 d-flex align-items-center justify-content-center rounded-5 m-3"
+        >
+          <img
+            src="https://placehold.co/600x500/E0E7FF/6366F1?text=Capture+Inspiration.&font=inter"
+            alt="Sign Up Illustration"
+            class="img-fluid w-75"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block signup-btn %}outline-{% endblock %}
+
+{% block footer %}{% endblock %}
