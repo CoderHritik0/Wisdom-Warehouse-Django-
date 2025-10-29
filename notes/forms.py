@@ -1,5 +1,5 @@
 from django import forms
-from .models import note, note_image
+from .models import note, note_image, Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm as DjangoAuthForm
 from django.contrib.auth.models import User
@@ -15,6 +15,12 @@ class NoteForm(forms.ModelForm):
             'color': forms.TextInput(attrs={'type': 'color', 'class': 'form-control'}),
             'is_hidden': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # ✅ Add data-note-id dynamically if instance exists
+        if self.instance and self.instance.pk:
+            self.fields['is_hidden'].widget.attrs['data-note-id'] = str(self.instance.pk)
 
 class MultiFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
@@ -77,3 +83,25 @@ class AuthenticationForm(DjangoAuthForm):
             'placeholder': 'Enter password',
             'id': 'floatingPassword'
         })
+
+class PinUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['pin']
+        widgets = {
+            'pin': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter 6 digit PIN'}),
+        }
+
+    def clean_pin(self):
+        pin = self.cleaned_data.get('pin')
+        if pin and (not pin.isdigit() or len(pin) != 6):
+            raise forms.ValidationError("PIN must be 6 digits.")
+        return pin
+    
+class PinCheckForm(forms.Form):
+    pin = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Enter Note PIN'}),
+        max_length=6,
+        min_length=6,
+        required=True,
+    )

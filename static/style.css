@@ -109,6 +109,7 @@ footer {
   padding: 20px;
   text-align: center;
   color: #6b7280;
+  box-shadow: 0 -0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
 
 /* Custom color classes for feature sections */

@@ -37,6 +37,7 @@
         <div class="mb-3">
           {{ form.is_hidden }} {{ form.is_hidden.label_tag }}
         </div>
+        
         {% if note and note.note_image_set.all %}
           <div class="mb-3" id="existing-images-section">
             <label class="form-label">Existing Images</label>

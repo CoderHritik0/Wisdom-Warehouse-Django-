@@ -48,9 +48,15 @@
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li>
-                  <a class="dropdown-item" href="#" id="viewHiddenBtn"
-                    >View Hidden Notes</a
-                  >
+                  {% if 'hidden' in request.path %}
+                    <a class="dropdown-item" href="{% url 'index' %}" id="viewHiddenBtn"
+                      >View Unhidden Notes</a
+                    >
+                  {% else %}
+                    <a class="dropdown-item" id="viewHiddenBtn" data-bs-toggle="modal" data-bs-target="#{% if request.user.profile.pin %}checkPinModal{% else %}hideNotesModal{% endif %}"
+                      >View Hidden Notes</a
+                    >
+                  {% endif %}
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
@@ -60,6 +66,8 @@
       </div>
     </nav>
   </header>
+
+  <!-- Delete Confirmation Modal -->
   <div class="modal" id="deleteModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -86,6 +94,57 @@
       </div>
     </div>
   </div>
+
+  <!-- Hide Notes Pin Modal -->
+  {% if not request.user.profile.pin %}
+    <div class="modal" id="hideNotesModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Enter Note Pin</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Please enter the pin to hide the note.</p>
+              <input type="password" class="form-control" id="setNotePin" placeholder="Enter Note Pin" />
+            </div>
+            <div class="modal-footer">
+            <button type="button" id="closeHideModalBtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="confirmHideBtn" onclick="setPin()" class="btn btn-outline-success">Set Pin</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+<!-- Pin Verification Modal -->
+<div class="modal fade" id="checkPinModal" tabindex="-1" aria-labelledby="checkPinModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="checkPinModalLabel">Enter Note Pin</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-body">{{ PinCheckForm.pin }}</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-outline-info">Verify Pin</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Incorrect Pin Alert -->
+{% if PinCheckForm.errors %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Incorrect Pin</strong> Please Enter the Correct PIN to View Hidden Notes.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endif %}
+
 {% endblock %} 
 
 {% block content %}{% endblock %}

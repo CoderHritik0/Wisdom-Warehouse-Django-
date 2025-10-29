@@ -14,17 +14,18 @@ function getCookie(name) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  /* ---------------------------
+     DELETE MODAL LOGIC
+  ---------------------------- */
   const deleteModal = document.getElementById("deleteModal");
   const confirmBtn = document.getElementById("confirmDeleteBtn");
 
-  // Variables to hold current delete context
-  let deleteType = null; // "note" or "image"
+  let deleteType = null;
   let deleteId = null;
-  let triggerBtn = null; // Button that triggered modal (used to remove DOM element)
+  let triggerBtn = null;
 
-  // When modal is shown, capture data from button that opened it
   deleteModal.addEventListener("show.bs.modal", function (event) {
-    const button = event.relatedTarget; // the button that triggered the modal
+    const button = event.relatedTarget;
     deleteType = button.getAttribute("data-type");
     deleteId =
       deleteType === "note"
@@ -33,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
     triggerBtn = button;
   });
 
-  // Handle confirmation click
   confirmBtn.addEventListener("click", async function () {
     if (!deleteId || !deleteType) return;
 
@@ -46,24 +46,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "X-CSRFToken": getCookie("csrftoken"),
-      },
+      headers: { "X-CSRFToken": getCookie("csrftoken") },
     });
 
-    const modal = bootstrap.Modal.getInstance(
-      document.getElementById("deleteModal")
-    );
-    if (modal) {
-      modal.hide();
-    }
+    const modal = bootstrap.Modal.getInstance(deleteModal);
+    if (modal) modal.hide();
+
     triggerBtn.closest(".position-relative").remove();
 
     if (response.ok) {
       if (deleteType === "note") {
         window.location.reload();
       } else if (deleteType === "image") {
-        // Optional: fade-out animation before removal
         const imageContainer = triggerBtn.closest(".position-relative");
         imageContainer.style.transition = "opacity 0.3s";
         imageContainer.style.opacity = "0";
@@ -73,4 +67,53 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Error deleting item.");
     }
   });
+
+  /* ---------------------------
+     HIDE NOTE + SET PIN LOGIC
+  ---------------------------- */
+  const checkbox = document.getElementById("id_is_hidden");
+  const modalEl = document.getElementById("hideNotesModal");
+  const modal = new bootstrap.Modal(modalEl);
+
+  if (!checkbox) return;
+
+  checkbox.addEventListener("change", function () {
+    modal.show();
+  });
 });
+function setPin() {
+  const closeHideModalBtn = document.getElementById("closeHideModalBtn");
+  const setPin = document.getElementById("setNotePin");
+  if (!setPin) return;
+
+  const pinValue = setPin.value.trim();
+
+  if (!pinValue) {
+    alert("Please enter a PIN.");
+    return;
+  }
+
+  if (pinValue.length !== 6 || isNaN(pinValue)) {
+    alert("Please enter a valid 6-digit numeric PIN.");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("pin", pinValue);
+
+  fetch(`/notes/set_pin/`, {
+    method: "POST",
+    headers: { "X-CSRFToken": getCookie("csrftoken") },
+    body: formData,
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error("Failed to set PIN");
+      return response.json();
+    })
+    .then((data) => {
+      console.log("✅ PIN set successfully:", data);
+      // continue hide note logic...
+    })
+    .catch((error) => console.error(error));
+  window.location.reload();
+}

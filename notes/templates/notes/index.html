@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Notes List | Wisdom WareHouse{% endblock %}
+{% block title %}{% if hidden %}Hidden Notes{% else %}Notes List{% endif %} | Wisdom WareHouse{% endblock %}
 
 {% block content %}
   <div class="container py-5">
@@ -14,4 +14,4 @@
   </div>
 {% endblock %}
 
-{% block footer %} {% if notes %} {# normal footer #} {% else %}fixed-bottom{% endif %} {% endblock %}
+{% block footer %} {% if notes|length > 1 %} {# normal footer #} {% else %}fixed-bottom{% endif %} {% endblock %}
